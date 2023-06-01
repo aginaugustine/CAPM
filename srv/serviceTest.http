@@ -1,17 +1,17 @@
 ### Catalog service
-GET http://localhost:4004/com.us330.DataCatalog/
+GET http://localhost:4004/catalogService/
 
 ### Catalog Metadata
-GET http://localhost:4004/com.us330.DataCatalog/$metadata
+GET http://localhost:4004/catalogService/$metadata
 
 ### Employee Data
-GET http://localhost:4004/com.us330.DataCatalog/EmployeeSet
+GET http://localhost:4004/catalogService/EmployeeSet
 
 ### Purchase Order Data with associations
-GET http://localhost:4004/com.us330.DataCatalog/POs?$top=2&$expand=Items,PARTNER_GUID
+GET http://localhost:4004/catalogService/POs?$top=2&$expand=Items,PARTNER_GUID
 
 ### Create a new Employee Record
-POST http://localhost:4004/com.us330.DataCatalog/EmployeeSet
+POST http://localhost:4004/catalogService/EmployeeSet
 Content-Type: application/json
 
 {
@@ -32,10 +32,10 @@ Content-Type: application/json
 }
 //all the calls triggred from bas is expecting response in odata v4,while sending data use v4 as well.unlike v2 we cannot give entityset('id') in v4,instead we give entityset/id
 ### Read a single record
-GET http://localhost:4004/com.us330.DataCatalog/EmployeeSet/d86eb8b4-58ac-4c3b-a345-d5e3ba568388
+GET http://localhost:4004/catalogService/EmployeeSet/d86eb8b4-58ac-4c3b-a345-d5e3ba568388
 
 ### Update a record 
-PATCH http://localhost:4004/com.us330.DataCatalog/EmployeeSet/d86eb8b4-58ac-4c3b-a345-d5e3ba568388
+PATCH http://localhost:4004/catalogService/EmployeeSet/d86eb8b4-58ac-4c3b-a345-d5e3ba568388
 Content-Type: application/json
 
 {
@@ -45,4 +45,25 @@ Content-Type: application/json
 
 //IF THE key is of type UUID,old v2 option works,like entityset('id')
 ### Read a single record
-GET http://localhost:4004/com.us330.DataCatalog/POs(PARTNER_GUID_NODE_KEY='74867AD200E41EDBA5D8B06885B04052')
+GET http://localhost:4004/catalogService/POs(PARTNER_GUID_NODE_KEY='74867AD200E41EDBA5D8B06885B04052')
+
+
+### Read a single record
+GET http://localhost:4004/catalogService/POs
+
+
+### Create a PO record
+POST  http://localhost:4004/catalogService/POs
+Content-Type: application/json
+
+{
+	"CURRENCY_CODE": "EUR",
+	"GROSS_AMOUNT": 3913.00,
+	"NET_AMOUNT": 3289,
+	"TAX_AMOUNT": 500.91,
+    "ID": "74867AD200E41EDBA5D8B06885B04051",
+	"PO_ID": "300000001",
+	"PARTNER_GUID_NODE_KEY": "74867AD200E41EDBA5D8B06885B04052",
+	"LIFECYCLE_STATUS": "N",
+	"OVERALL_STATUS": "P"
+}
