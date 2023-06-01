@@ -1,6 +1,8 @@
 using {com.us330.db.master,com.us330.db.transaction} from '../db/datamodel';
 //creation of odata service.by default crud operation is supported in capm.
 service catalogService@(path:'/com.us330.DataCatalog'){
+    //using capabilities annottation we can control the activities on the entity set
+    @Capabilities : { Insertable,Deletable:false,Updatable }
     entity EmployeeSet as projection on master.employees;
     entity AddressSet as projection on master.address;
     entity ProductSet as projection on master.product;
